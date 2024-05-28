@@ -1,6 +1,8 @@
 class LeadsCollectionElement extends HTMLElement {
     constructor() {
         super();
+
+        console.log("Connected!");
     }
 
     connectedCallback() {
