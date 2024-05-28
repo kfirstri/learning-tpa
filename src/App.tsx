@@ -5,7 +5,7 @@ import './App.css';
 type LeadRecord = {
   email: string,
   status: 'SUBSCRIBED' | 'UNSUBSCRIBED',
-  validity: string,
+  validity: 'VALID' | 'INVALID',
   subscribeDate: string
 }
 
@@ -16,7 +16,7 @@ function App() {
       status: 'SUBSCRIBED',
       validity: 'VALID',
       subscribeDate: '01/12/2024'
-    }
+    },
   ];
 
   const columns = [
@@ -25,15 +25,15 @@ function App() {
       render: (row: LeadRecord) => row.email
     },
     {
-      title: 'status',
+      title: 'Status',
       render: (row: LeadRecord) => row.status
     },
     {
-      title: 'validity',
+      title: 'Validity',
       render: (row: LeadRecord) => row.validity
     },
     {
-      title: 'subscribeDate',
+      title: 'Subscribe Date',
       render: (row: LeadRecord) => row.subscribeDate
     },
   ];
@@ -42,9 +42,9 @@ function App() {
   return (
     <WixDesignSystemProvider>
       <Page>
-        <Page.Header title='Bla'
+        <Page.Header title='Subscribers'
           actionsBar={
-            <Button>Yo!</Button>
+            <Button>Update</Button>
           } />
         <Page.Content>
           <Table skin="standard" data={leads} columns={columns}>

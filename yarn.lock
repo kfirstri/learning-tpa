@@ -344,6 +344,18 @@
     "@nodelib/fs.scandir" "2.1.5"
     "fastq" "^1.6.0"
 
+"@r2wc/core@^1.0.0":
+  "integrity" "sha512-pEgtPXhfgg8mv/MooU83cb5sXC2aQOXPLm9UX7E7Oz/OXmrnP5r8hD/nJL1empWxC4wo1YeBXvrFu8fXsMgGZQ=="
+  "resolved" "https://registry.npmjs.org/@r2wc/core/-/core-1.1.0.tgz"
+  "version" "1.1.0"
+
+"@r2wc/react-to-web-component@^2.0.3":
+  "integrity" "sha512-nlDJ0LHiWLG/EFB5tBtA+9KLF2oMBeDSAXL08NUzAuj/ac+V0NkMl/RvCFdDFnyrPQqpzpD9uOvOY2E5IFpdCQ=="
+  "resolved" "https://registry.npmjs.org/@r2wc/react-to-web-component/-/react-to-web-component-2.0.3.tgz"
+  "version" "2.0.3"
+  dependencies:
+    "@r2wc/core" "^1.0.0"
+
 "@react-aria/focus@^3.16.2":
   "integrity" "sha512-FLTySoSNqX++u0nWZJPPN5etXY0WBxaIe/YuL/GTEeuqUIuC/2bJSaw5hlsM6T2yjy6Y/VAxBcKSdAFUlU6njQ=="
   "resolved" "https://registry.npmjs.org/@react-aria/focus/-/focus-3.17.1.tgz"
