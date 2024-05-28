@@ -17,7 +17,7 @@ const elementStyle = `
         gap: 10px;
         align-items: flex-end;
 
-        span.submit-button {
+        .submit {
             background-color: blue;
             color: white;
             margin:0;
@@ -54,7 +54,7 @@ const htmlContent = `
         <label for="userEmail">Your email address *</label>
         <input type="text" id="userEmail" />
     </div>
-    <span class='submit-button'>Send</span>
+    <button type="submit" class='submit'>Send</span>
 </div>
 `;
 
