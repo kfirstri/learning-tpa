@@ -4,7 +4,7 @@ import { kv } from "@vercel/kv";
 export async function GET(request: Request) {
     const url = new URL(request.url);
 
-    const code = url.searchParams.get('token');
+    const code = url.searchParams.get('code');
     const instanceId = url.searchParams.get('instanceId');
 
     if (!instanceId) {
