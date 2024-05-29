@@ -11,9 +11,6 @@ export async function GET(request: Request) {
         return new Response('Missing instance id', { status: 401 });
     }
 
-    console.log('Saving code for instance id', instanceId);
-    await kv.set(instanceId, code);
-
     // Get access and refresh tokens
     const response = await fetch(
         'https://www.wixapis.com/oauth/access',
@@ -31,7 +28,11 @@ export async function GET(request: Request) {
         }
     )
 
+    console.log(response);
     const { access_token, refresh_token } = await response.json();
+
+    console.log('Saving refresh token for instance id', instanceId);
+    await kv.set(instanceId, refresh_token);
 
     return new Response(null, {
         status: 308,
