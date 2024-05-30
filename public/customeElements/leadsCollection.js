@@ -86,11 +86,11 @@ class LeadsCollectionElement extends HTMLElement {
         this.shadow.appendChild(style);
         this.shadow.appendChild(wrapper);
 
-        this.shadow.getElementById('submitButton').onclick = this.submitEmail;
+        this.shadow.getElementById('submitButton').addEventListener('click', this.submitEmail);
     }
 
     submitEmail = async (event) => {
-        console.log('click');
+        console.log('click', window.location);
         const emailInput = this.shadow.getElementById('userEmail');
         const email = emailInput.value;
 
