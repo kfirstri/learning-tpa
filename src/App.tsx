@@ -1,6 +1,7 @@
 import { Button, Page, Table, WixDesignSystemProvider } from '@wix/design-system';
 import '@wix/design-system/styles.global.css';
 import './App.css';
+import { useEffect, useState } from 'react';
 
 type LeadRecord = {
   email: string,
@@ -9,15 +10,10 @@ type LeadRecord = {
   subscribeDate: string
 }
 
+
 function App() {
-  const leads: LeadRecord[] = [
-    {
-      email: 'kfirs@wix.com',
-      status: 'SUBSCRIBED',
-      validity: 'VALID',
-      subscribeDate: '01/12/2024'
-    },
-  ];
+  const [subscriptionsData, setSubscriptionsData] = useState<Array<Record<string, string>>>();
+  const leads: LeadRecord[] = subscriptionsData?.map(item => { return { email: item.email, status: 'SUBSCRIBED', validity: 'VALID', subscribeDate: 'today' } }) || [];
 
   const columns = [
     {
@@ -37,6 +33,23 @@ function App() {
       render: (row: LeadRecord) => row.subscribeDate
     },
   ];
+
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const instance = searchParams.get('instance');
+
+    if (!instance) {
+      return;
+    }
+
+    const fetchSubscriptions = async () => {
+      const data = await fetch(`/api/getSubscriptions?instance=${instance}`);
+      setSubscriptionsData(await data.json());
+    };
+
+    fetchSubscriptions();
+  });
 
 
   return (
