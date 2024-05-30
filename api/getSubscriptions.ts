@@ -29,7 +29,7 @@ export async function refreshWixToken(refreshToken: string): Promise<{ refresh_t
     return refreshTokenResponse.json();
 }
 
-export async function getSubscriptions(request: Request) {
+export async function GET(request: Request) {
     const url = new URL(request.url);
     const appInstance = url.searchParams.get('instance');
 
