@@ -52,9 +52,9 @@ const htmlContent = `
 <div class='form-wrapper'>
     <div class="email-input-wrapper">
         <label for="userEmail">Your email address *</label>
-        <input type="text" id="userEmail" />
+        <input type="email" id="userEmail" />
     </div>
-    <button type="submit" class='submit'>Send</span>
+    <button type="submit" class="submit" id="submitButton">Send</span>
 </div>
 `;
 
@@ -64,18 +64,49 @@ class LeadsCollectionElement extends HTMLElement {
     }
 
     connectedCallback() {
-        const shadow = this.attachShadow({ mode: "open" });
+        this.shadow = this.attachShadow({ mode: 'open' });
 
-        const wrapper = document.createElement("div");
-        wrapper.setAttribute("class", "leads-collection-wrapper");
+        const wrapper = document.createElement('div');
+        wrapper.setAttribute('class', 'leads-collection-wrapper');
         wrapper.innerHTML = htmlContent;
 
-        const style = document.createElement("style");
+        const style = document.createElement('style');
         style.textContent = elementStyle;
 
         // Connect everything
-        shadow.appendChild(style);
-        shadow.appendChild(wrapper);
+        this.shadow.appendChild(style);
+        this.shadow.appendChild(wrapper);
+
+        this.shadow.getElementById('submitButton').onclick = this.submitEmail;
+    }
+
+    submitEmail = async (event) => {
+        const searchParams = new URLSearchParams(window.location.search);
+        const instance = searchParams.get('instance');
+
+        const emailInput = this.shadow.getElementById('userEmail');
+        const email = emailInput.value;
+
+        if (!instance || !email) {
+            return;
+        }
+
+        event.target.style.backgroundColor = 'red';
+
+        console.log('adding new subscription')
+        await fetch(`/api/addSubscriptions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                appInstance: instance,
+                subscribedEmail: email
+            })
+        });
+
+        event.target.style.backgroundColor = 'blue';
+        emailInput.value = '';
     }
 };
 

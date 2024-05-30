@@ -64,11 +64,16 @@ export async function GET(request: Request) {
         }
     )
 
+    console.debug('email response', emailSubscriptionsResponse);
+
     const responseData = await emailSubscriptionsResponse.json();
 
-    const emailSubscriptions: Record<string,string>[] = responseData.email_subscriptions;
 
-    return new Response(JSON.stringify(emailSubscriptions.map(item => {item.email})));
+    console.debug('responseData', responseData);
+
+    const emailSubscriptions: Record<string,string>[] = responseData.subscriptions;
+
+    return new Response(JSON.stringify(emailSubscriptions?.map(item => {item.email})));
 };
 
 // TODO:
