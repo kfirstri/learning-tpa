@@ -64,6 +64,15 @@ class LeadsCollectionElement extends HTMLElement {
     }
 
     connectedCallback() {
+        const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value ?? "{}");
+        // const wixsettings = JSON.parse(
+        //   this?.attributes?.wixsettings?.value ?? "{}",
+        // );
+
+        // current instanceId
+        this.instanceId = wixconfig?.instanceId || "";
+        console.log('instance id', this.instanceId);
+
         this.shadow = this.attachShadow({ mode: 'open' });
 
         const wrapper = document.createElement('div');
@@ -81,13 +90,11 @@ class LeadsCollectionElement extends HTMLElement {
     }
 
     submitEmail = async (event) => {
-        const searchParams = new URLSearchParams(window.location.search);
-        const instance = searchParams.get('instance');
-
+        console.log('click');
         const emailInput = this.shadow.getElementById('userEmail');
         const email = emailInput.value;
 
-        if (!instance || !email) {
+        if (!this.instance || !email) {
             return;
         }
 
@@ -100,7 +107,7 @@ class LeadsCollectionElement extends HTMLElement {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                appInstance: instance,
+                appInstance: this.instance,
                 subscribedEmail: email
             })
         });
