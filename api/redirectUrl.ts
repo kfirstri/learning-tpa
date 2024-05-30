@@ -11,6 +11,7 @@ export async function GET(request: Request) {
         return new Response('Missing instance id', { status: 401 });
     }
 
+
     // Get access and refresh tokens
     const response = await fetch(
         'https://www.wixapis.com/oauth/access',
@@ -20,15 +21,15 @@ export async function GET(request: Request) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                'grantType': 'authorization_code',
-                'clientId': process.env.APP_ID,
-                'clientSecret': process.env.APP_SECRET,
+                'grant_type': 'authorization_code',
+                'client_id': process.env.APP_ID,
+                'client_secret': process.env.APP_SECRET,
                 'code': code
             })
         }
     )
 
-    console.log(response);
+    console.log('response', response);
     const { access_token, refresh_token } = await response.json();
 
     console.log('Saving refresh token for instance id', instanceId);
